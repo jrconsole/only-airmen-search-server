@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UsersControllerTest {
+public class ControllerTest {
     @Autowired
     private MockMvc mvc;
 
@@ -29,12 +29,24 @@ public class UsersControllerTest {
     @Test
     @Transactional
     @Rollback
-    public void testGetAll() throws Exception {
+    public void testGetAllUsers() throws Exception {
         RequestBuilder request = get("/users")
                 .contentType(MediaType.APPLICATION_JSON);
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].username", is("fighterPilotXOXO")));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void testGetAllLocations() throws Exception {
+        RequestBuilder request = get("/locations")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", is("Kirtland")));
     }
 }
