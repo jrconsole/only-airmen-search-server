@@ -15,14 +15,17 @@ public class Controller {
     private final UserRepository userRepo;
     private final LocationRepository locationRepo;
     private final HobbyRepository hobbyRepo;
+    private final UserHobbyRepository userHobbyRepo;
 
     public Controller(
             UserRepository userRepo,
             LocationRepository locationRepo,
-            HobbyRepository hobbyRepo) {
+            HobbyRepository hobbyRepo,
+            UserHobbyRepository userHobbyRepo) {
         this.userRepo = userRepo;
         this.locationRepo = locationRepo;
         this.hobbyRepo = hobbyRepo;
+        this.userHobbyRepo = userHobbyRepo;
     }
 
     @CrossOrigin
@@ -41,5 +44,11 @@ public class Controller {
     @GetMapping("/hobbies")
     public Iterable<Hobby> allHobbies() {
         return this.hobbyRepo.findAll();
+    }
+
+    @CrossOrigin
+    @GetMapping("/user-hobbies")
+    public Iterable<UserHobby> allUserHobbies() {
+        return this.userHobbyRepo.findAll();
     }
 }

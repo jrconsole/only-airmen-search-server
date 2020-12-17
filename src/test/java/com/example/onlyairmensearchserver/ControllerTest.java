@@ -61,4 +61,16 @@ public class ControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name", is("Flying")));
     }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void testGetAllUserHobbies() throws Exception {
+        RequestBuilder request = get("/user-hobbies")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].hobby_id", is(1)));
+    }
 }
